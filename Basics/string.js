@@ -29,3 +29,4 @@ console.log(myName.split());// this function convert a string in to an array
 let string = 'rakesh kumar sharma'
 
 console.log(string.split(" "));
+
