@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color:black; color: #fff;">
+    <div class="bg-black">
+        <h1 class="heading">Dom leraning</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis iste ut vitae exercitationem illum ullam eum beatae quas! Odio perspiciatis repudiandae atque ut dignissimos quo tempora laborum. Eligendi, unde tempore!</p>
+    </div>
+    
+    <ul class="language">
+        <li>javascript</li>
+    </ul>
+</body>
+
+<script>
+    function addLanguage(name){
+        const li = document.createElement('li');
+        li.innerHTML = `${name}`;
+        document.querySelector('.language').appendChild(li);
+    }
+    addLanguage('php');
+    addLanguage('pyhton');
+//remove 
+const lastLang = document.querySelector("li:last-child");
+lastLang.remove();
+</script>
+</html>
+

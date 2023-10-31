@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Number guessing game</h1>
+      <p>Try and guess a random number between 1 and 100.</p>
+      <p>You have 10 attempts to guess the right number.</p>
+      </br>
+          <form class="form">
+              <label2 for="guessField" id="guess">Guess a number</label>
+              <input type="text" id="guessField" class="guessField">
+              <p id="error" style="color: red;"></p>
+              <input type="submit" id="subt" value="Submit guess" class="guessSubmit">
+          </form>
+          <div class="resultParas">
+              <p >Previous Guesses: <span class="guesses"></span></p>
+              <p >Guesses Remaining: <span class="lastResult">10</span></p>
+              <p class="lowOrHi"></p>
+          </div>
+      </div>
+</body>
+<!-- <script src ="project4.js"></script> -->
+<script>
+    const randomNumber = parseInt(Math.random() * 100 + 1);
+    const form = document.querySelector('#subt');
+    let numberOfGame = 0;
+    let playGame = true;
+    if(playGame) {
+        form.addEventListener('click',function(e) {
+            e.preventDefault();
+            const number = parseInt(document.querySelector('#guessField').value);
+            validateGuess(number);
+            console.log(number);
+        })  
+    }
+    function validateGuess(number) {
+        if(number < 0 || number > 100 || isNaN(number)) {
+            document.querySelector("#error").innerHTML = "Please give a valid number";
+        }
+        else {
+            document.querySelector("#error").innerHTML = "";
+            numberOfGame++;
+            if(numberOfGame > 10) {
+                document.querySelector('.lowOrHi').innerHTML = 'You have reached the limit';
+                endGame();
+            }
+            else {
+                if(number === randomNumber) {
+                    document.querySelector('.lowOrHi').innerHTML = 'mathced the guess number ';
+                    endGame();
+                }
+                else if (number > randomNumber) {
+                    document.querySelector('.lowOrHi').innerHTML = 'guessed number is high ';
+                    document.querySelector('.guesses').innerHTML +=  `${number},`;
+                    document.querySelector('.lastResult').innerHTML =  `${10 - numberOfGame}`;
+                    document.querySelector('#guessField').value = '';
+
+                }
+                else if (number < randomNumber) {
+                    document.querySelector('.lowOrHi').innerHTML = 'guessed number is less ';
+                    document.querySelector('.guesses').innerHTML +=  `${number},`;
+                    document.querySelector('.lastResult').innerHTML =  `${10 - numberOfGame}`;
+                    document.querySelector('#guessField').value = '';
+
+                }
+            }
+        }
+    }
+
+    function endGame() {
+    const element = document.createElement('p');
+    element.classList.add('button');
+    element.innerHTML = `<h2 id="newGame">Start Again</h2>`;
+    document.querySelector('.resultParas').appendChild(element);
+    playGame = false;
+    newGame();
+    }
+
+    function newGame() {
+        const newGameButton =  document.querySelector('#newGame');
+        newGameButton.addEventListener('click',function(){
+            document.querySelector('.lowOrHi').innerHTML = '';
+            document.querySelector('.guesses').innerHTML = '';
+            document.querySelector('.lastResult').innerHTML = '';
+            document.querySelector('#guessField').value = ''; 
+            const p = document.querySelector('.button');
+            document.querySelector('.resultParas').removeChild(p);
+            numberOfGame = 0;
+           playGame = true;
+
+        })
+    }
+    
+</script>
+</html>
